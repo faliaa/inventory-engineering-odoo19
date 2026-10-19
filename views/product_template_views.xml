@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_form_inventory_purchase" model="ir.ui.view">
+        <field name="name">product.template.form.inventory.purchase</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='general_information']" position="inside">
+                <group string="Inventory &amp; Purchase Information">
+                    <field name="part_number"/>
+                    <field name="brand"/>
+                    <field name="specification"/>
+                    <field name="minimum_stock"/>
+                    <field name="maximum_stock"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

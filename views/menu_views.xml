@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Menu utama aplikasi -->
+    <menuitem
+        id="menu_inventory_purchase_root"
+        name="Inventory &amp; Purchase Management"
+        sequence="10"
+        groups="stock.group_stock_user"
+    />
+
+    <!-- Aksi untuk membuka daftar produk -->
+    <record id="action_inventory_purchase_products" model="ir.actions.act_window">
+        <field name="name">Master Product</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Master Product -->
+    <menuitem
+        id="menu_inventory_purchase_products"
+        name="Master Product"
+        parent="menu_inventory_purchase_root"
+        action="action_inventory_purchase_products"
+        sequence="10"
+        groups="stock.group_stock_user"
+    />
+
+    <!-- Menu Material Request -->
+    <menuitem
+        id="menu_inventory_material_request"
+        name="Material Request"
+        parent="menu_inventory_purchase_root"
+        action="action_inventory_material_request"
+        sequence="15"
+        groups="stock.group_stock_user"
+    />
+
+        <!-- Menu Barang Masuk -->
+    <menuitem
+        id="menu_inventory_receipts"
+        name="Barang Masuk"
+        parent="menu_inventory_purchase_root"
+        action="stock.action_picking_tree_incoming"
+        sequence="20"
+        groups="stock.group_stock_user"
+    />
+
+    <!-- Menu Barang Keluar -->
+    <menuitem
+        id="menu_inventory_deliveries"
+        name="Barang Keluar"
+        parent="menu_inventory_purchase_root"
+        action="stock.action_picking_tree_outgoing"
+        sequence="30"
+        groups="stock.group_stock_user"
+    />
+    
+        <!-- Akses menu Equipment Register -->
+    <menuitem
+        id="menu_equipment_register"
+        name="Equipment Register"
+        parent="menu_inventory_purchase_root"
+        action="action_equipment_register"
+        sequence="20"
+        groups="stock.group_stock_user"
+    />
+        <!-- Menu Configuration -->
+    <menuitem
+        id="menu_inventory_purchase_configuration"
+        name="Configuration"
+        parent="menu_inventory_purchase_root"
+        sequence="90"
+        groups="stock.group_stock_manager"
+    />
+
+    <!-- Submenu Settings -->
+    <menuitem
+    id="menu_inventory_purchase_settings"
+    name="Settings"
+    parent="menu_inventory_purchase_configuration"
+    action="action_inventory_purchase_settings"
+    sequence="10"
+    groups="stock.group_stock_manager"
+    />
+
+        <!-- Submenu Master Data -->
+    <menuitem
+        id="menu_inventory_purchase_master_data"
+        name="Master Data"
+        parent="menu_inventory_purchase_configuration"
+        sequence="20"
+        groups="stock.group_stock_manager"
+    />
+
+    <!-- Master Product Categories -->
+    <menuitem
+        id="menu_master_product_categories"
+        name="Product Categories"
+        parent="menu_inventory_purchase_master_data"
+        action="product.product_category_action_form"
+        sequence="10"
+        groups="stock.group_stock_manager"
+    />
+
+    <!-- Master Units of Measure -->
+    <menuitem
+        id="menu_master_units_of_measure"
+        name="Units of Measure"
+        parent="menu_inventory_purchase_master_data"
+        action="uom.product_uom_form_action"
+        sequence="20"
+        groups="stock.group_stock_manager"
+    />
+
+    <!-- Master Storage Locations -->
+    <menuitem
+        id="menu_master_storage_locations"
+        name="Storage Locations"
+        parent="menu_inventory_purchase_master_data"
+        action="stock.action_location_form"
+        sequence="30"
+        groups="stock.group_stock_manager"
+    />
+
+</odoo> 

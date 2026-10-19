@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tampilan daftar Equipment Register -->
+    <record id="view_equipment_register_list" model="ir.ui.view">
+        <field name="name">inventory.equipment.register.list</field>
+        <field name="model">inventory.equipment.register</field>
+        <field name="arch" type="xml">
+            <list string="Equipment Register">
+                <field name="asset_id"/>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="serial_number"/>
+                <field name="supplier_id"/>
+                <field name="location_id"/>
+                <field name="status" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Tampilan formulir Equipment Register -->
+    <record id="view_equipment_register_form" model="ir.ui.view">
+        <field name="name">inventory.equipment.register.form</field>
+        <field name="model">inventory.equipment.register</field>
+        <field name="arch" type="xml">
+            <form string="Equipment Register">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Contoh: Scanner"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Equipment Information">
+                            <field name="asset_id"/>
+                            <field name="product_id"/>
+                            <field name="serial_number"/>
+                        </group>
+
+                        <group string="Assignment Information">
+                            <field name="supplier_id"/>
+                            <field name="location_id"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="notes" placeholder="Catatan tambahan..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Aksi untuk membuka Equipment Register -->
+    <record id="action_equipment_register" model="ir.actions.act_window">
+        <field name="name">Equipment Register</field>
+        <field name="res_model">inventory.equipment.register</field>
+        <field name="view_mode">list,form</field>
+        <field name="target">current</field>
+    </record>
+
+</odoo>

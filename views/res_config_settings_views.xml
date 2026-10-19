@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_inventory_purchase" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inventory.purchase</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    string="Inventory &amp; Purchase Management"
+                    name="inventory_purchase_management"
+                    groups="stock.group_stock_manager"
+                >
+                    <block title="Inventory Settings">
+                        <setting
+                            string="Minimum Stock Alert"
+                            help="Enable minimum stock alert configuration."
+                        >
+                            <field name="minimum_stock_alert"/>
+                        </setting>
+
+                        <setting
+                            string="Stock Out Approval"
+                            help="Configure whether stock issue approval is required."
+                        >
+                            <field name="stock_out_approval"/>
+                        </setting>
+
+                        <setting
+                            string="Equipment Tracking"
+                            help="Enable equipment tracking configuration."
+                        >
+                            <field name="equipment_tracking"/>
+                        </setting>
+
+                        <setting
+                            string="Default Stock Location"
+                            help="Choose the default internal stock location."
+                        >
+                            <field
+                                name="inventory_default_stock_location_id"
+                                options="{'no_create': True}"
+                            />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_inventory_purchase_settings" model="ir.actions.act_window">
+        <field name="name">Inventory &amp; Purchase Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module': 'inventory_purchase_management'}</field>
+    </record>
+
+</odoo>
