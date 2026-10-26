@@ -1,5 +1,5 @@
 {
-    'name': 'Inventory & Purchase Management',
+    'name': 'Engineering',
     'version': '19.0.1.0.0',
     'summary': 'Integrated Inventory and Purchase Management',
     'description': """

@@ -9,7 +9,7 @@
                 <field name="goods_condition"
                        string="Kondisi Barang"
                        optional="show"
-                       readonly="parent.state != 'draft'"/>
+                       readonly="parent.state in ['done', 'cancel']"/>
             </xpath>
         </field>
     </record>

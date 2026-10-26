@@ -4,7 +4,7 @@
     <!-- Menu utama aplikasi -->
     <menuitem
         id="menu_inventory_purchase_root"
-        name="Inventory &amp; Purchase Management"
+        name="Engineering"
         sequence="10"
         groups="stock.group_stock_user"
     />
