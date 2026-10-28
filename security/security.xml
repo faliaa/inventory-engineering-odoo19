@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Kategori hak akses Engineering -->
+    <record id="module_category_engineering" model="ir.module.category">
+        <field name="name">Engineering</field>
+        <field name="description">Hak akses aplikasi Engineering.</field>
+        <field name="sequence">35</field>
+    </record>
+
+    <!-- Kelompok hak akses Stock Card -->
+    <record id="privilege_engineering_stock" model="res.groups.privilege">
+        <field name="name">Engineering Stock</field>
+        <field name="category_id" ref="inventory_purchase_management.module_category_engineering"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Grup yang dapat mengakses Stock Card -->
+    <record id="group_engineering_stock_card" model="res.groups">
+        <field name="name">Engineering Stock Card</field>
+        <field name="privilege_id" ref="inventory_purchase_management.privilege_engineering_stock"/>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+</odoo>

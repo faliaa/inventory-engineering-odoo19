@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_inventory_equipment_register_user,inventory.equipment.register.user,model_inventory_equipment_register,stock.group_stock_user,1,1,1,0
 access_inventory_material_request_user,inventory.material.request.user,model_inventory_material_request,stock.group_stock_user,1,1,1,0
 access_inventory_material_request_line_user,inventory.material.request.line.user,model_inventory_material_request_line,stock.group_stock_user,1,1,1,0
+access_engineering_stock_card_user,engineering.stock.card.user,model_engineering_stock_card,inventory_purchase_management.group_engineering_stock_card,1,1,1,0

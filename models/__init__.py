@@ -6,3 +6,4 @@ from . import res_config_settings
 from . import material_request
 from . import stock_move
 from . import stock_picking
+from . import stock_card
