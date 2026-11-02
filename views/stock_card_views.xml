@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <record id="view_engineering_stock_card_document_list" model="ir.ui.view">
+        <field name="name">engineering.stock.card.document.list</field>
+        <field name="model">engineering.stock.card.document</field>
+        <field name="arch" type="xml">
+            <list string="Stock Card">
+                <field name="name"/>
+                <field name="posting_date"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="goods_condition"/>
+                <field name="product_ids" widget="many2many_tags"/>
+                <field name="line_count"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_engineering_stock_card_document_form" model="ir.ui.view">
+        <field name="name">engineering.stock.card.document.form</field>
+        <field name="model">engineering.stock.card.document</field>
+        <field name="arch" type="xml">
+            <form string="Stock Card">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_add_all_stock_card"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-plus">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Add All Stock Card</span>
+                            </div>
+                        </button>
+                        <button name="action_clear_all_stock_card"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-trash">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Clear All Stock Card</span>
+                            </div>
+                        </button>
+                        <button name="action_print_excel"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-file-excel-o">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Print Excel</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="posting_date"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="goods_condition"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="product_ids"
+                               widget="many2many_tags"
+                               options="{'no_create': True}"/>
+                    </group>
+                    <notebook>
+                        <page string="Detail" name="detail">
+                            <field name="line_ids">
+                                <list editable="bottom" create="0" delete="0">
+                                    <field name="date" readonly="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="product_id" readonly="1"/>
+                                    <field name="goods_condition" readonly="1"/>
+                                    <field name="qty_in" readonly="1"/>
+                                    <field name="qty_out" readonly="1"/>
+                                    <field name="description"/>
+                                    <field name="stock_card_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_engineering_stock_card_document_search" model="ir.ui.view">
+        <field name="name">engineering.stock.card.document.search</field>
+        <field name="model">engineering.stock.card.document</field>
+        <field name="arch" type="xml">
+            <search string="Stock Card Documents">
+                <field name="name"/>
+                <field name="posting_date"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="product_ids"/>
+                <field name="goods_condition"/>
+                <group>
+                    <filter name="group_by_posting_date"
+                            string="Posting Date"
+                            context="{'group_by': 'posting_date'}"/>
+                    <filter name="group_by_condition"
+                            string="Condition"
+                            context="{'group_by': 'goods_condition'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- Daftar Stock Card -->
     <record id="view_engineering_stock_card_list" model="ir.ui.view">
         <field name="name">engineering.stock.card.list</field>
@@ -22,21 +133,74 @@
         </field>
     </record>
 
-    <!-- Aksi Stock Card -->
-    <record id="action_engineering_stock_card" model="ir.actions.act_window">
-        <field name="name">Stock Card</field>
-        <field name="res_model">engineering.stock.card</field>
-        <field name="view_mode">list</field>
+    <record id="view_engineering_stock_card_pivot" model="ir.ui.view">
+        <field name="name">engineering.stock.card.pivot</field>
+        <field name="model">engineering.stock.card</field>
+        <field name="arch" type="xml">
+            <pivot string="Stock Movement Report">
+                <field name="date" type="row" interval="year"/>
+                <field name="product_id" type="row"/>
+                <field name="goods_condition" type="col"/>
+                <field name="qty_in" type="measure"/>
+                <field name="qty_out" type="measure"/>
+            </pivot>
+        </field>
     </record>
 
-    <!-- Menu Stock Card di aplikasi Engineering -->
-    <menuitem
-        id="menu_engineering_stock_card"
-        name="Stock Card"
-        parent="menu_inventory_purchase_root"
-        action="action_engineering_stock_card"
-        sequence="40"
-        groups="stock.group_stock_user"
-    />
+    <record id="view_engineering_stock_card_graph" model="ir.ui.view">
+        <field name="name">engineering.stock.card.graph</field>
+        <field name="model">engineering.stock.card</field>
+        <field name="arch" type="xml">
+            <graph string="Stock Movements by Year" type="bar">
+                <field name="date" interval="year"/>
+                <field name="qty_in" type="measure"/>
+                <field name="qty_out" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_engineering_stock_card_search" model="ir.ui.view">
+        <field name="name">engineering.stock.card.search</field>
+        <field name="model">engineering.stock.card</field>
+        <field name="arch" type="xml">
+            <search string="Stock Movements">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="location_dest_id"/>
+                <field name="goods_condition"/>
+                <filter name="incoming" string="Incoming"
+                        domain="[('qty_in', '&gt;', 0)]"/>
+                <filter name="outgoing" string="Outgoing"
+                        domain="[('qty_out', '&gt;', 0)]"/>
+                <group>
+                    <filter name="group_by_year" string="Year"
+                            context="{'group_by': 'date:year'}"/>
+                    <filter name="group_by_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                    <filter name="group_by_condition" string="Condition"
+                            context="{'group_by': 'goods_condition'}"/>
+                    <filter name="group_by_location" string="Source Location"
+                            context="{'group_by': 'location_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_engineering_stock_card" model="ir.actions.act_window">
+        <field name="name">Stock Card</field>
+        <field name="res_model">engineering.stock.card.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_engineering_stock_card_document_list"/>
+        <field name="search_view_id" ref="view_engineering_stock_card_document_search"/>
+    </record>
+
+    <record id="action_engineering_stock_movement_report" model="ir.actions.act_window">
+        <field name="name">Stock Movement Report</field>
+        <field name="res_model">engineering.stock.card</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="search_view_id" ref="view_engineering_stock_card_search"/>
+    </record>
 
 </odoo>

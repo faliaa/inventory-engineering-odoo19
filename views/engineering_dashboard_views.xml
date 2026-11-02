@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_engineering_stock_dashboard_kanban" model="ir.ui.view">
+        <field name="name">engineering.stock.dashboard.kanban</field>
+        <field name="model">engineering.stock.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban create="0" edit="0" delete="0" class="o_kanban_dashboard">
+                <field name="company_id"/>
+                <field name="qty_on_hand"/>
+                <field name="good_stock"/>
+                <field name="bad_stock"/>
+                <field name="qty_in"/>
+                <field name="qty_out"/>
+                <field name="location_count"/>
+                <field name="product_count"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="o_kanban_card p-4 w-100">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h2 class="mb-1">Engineering Dashboard</h2>
+                                    <div class="text-muted">
+                                        <field name="company_id"/>
+                                    </div>
+                                </div>
+                                <button type="object"
+                                        name="action_open_stock_summary"
+                                        class="btn btn-primary">
+                                    Stock Summary
+                                </button>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted">Total On Hand</div>
+                                        <div class="fs-2 fw-bold">
+                                            <field name="qty_on_hand"/>
+                                        </div>
+                                        <button type="object"
+                                                name="action_open_stock_on_hand"
+                                                class="btn btn-link p-0">
+                                            View stock by location
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted">Good Stock</div>
+                                        <div class="fs-2 fw-bold text-success">
+                                            <field name="good_stock"/>
+                                        </div>
+                                        <button type="object"
+                                                name="action_open_good_stock"
+                                                class="btn btn-link p-0">
+                                            View good stock
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted">Bad Stock</div>
+                                        <div class="fs-2 fw-bold text-danger">
+                                            <field name="bad_stock"/>
+                                        </div>
+                                        <button type="object"
+                                                name="action_open_bad_stock"
+                                                class="btn btn-link p-0">
+                                            View bad stock
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted">Stock In</div>
+                                        <div class="fs-2 fw-bold text-primary">
+                                            <field name="qty_in"/>
+                                        </div>
+                                        <button type="object"
+                                                name="action_open_stock_in"
+                                                class="btn btn-link p-0">
+                                            View receipts
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted">Stock Out</div>
+                                        <div class="fs-2 fw-bold text-warning">
+                                            <field name="qty_out"/>
+                                        </div>
+                                        <button type="object"
+                                                name="action_open_stock_out"
+                                                class="btn btn-link p-0">
+                                            View issues
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="border rounded p-3 h-100">
+                                        <div class="text-muted">Locations in Use</div>
+                                        <div class="fs-2 fw-bold">
+                                            <field name="location_count"/>
+                                        </div>
+                                        <div class="text-muted">
+                                            <field name="product_count"/> products in stock
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

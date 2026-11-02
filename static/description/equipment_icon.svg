@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+    <g fill="#1681b8">
+        <circle cx="64" cy="64" r="47"/>
+        <rect x="57" y="5" width="14" height="20" rx="3"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(30 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(60 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(90 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(120 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(150 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(180 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(210 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(240 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(270 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(300 64 64)"/>
+        <rect x="57" y="5" width="14" height="20" rx="3" transform="rotate(330 64 64)"/>
+    </g>
+    <circle cx="64" cy="64" r="36" fill="#fff"/>
+    <defs>
+        <clipPath id="gear-center">
+            <circle cx="64" cy="64" r="34"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#gear-center)" fill="#41464b" stroke="#41464b" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="translate(14.08 14.08) scale(.78)">
+            <path d="m44 84 37-37" fill="none" stroke-width="7"/>
+            <path d="M75 48 80 43c-4-6-3-13 2-18 5-5 12-6 18-3l-9 9 2 5 5 2 9-9c3 6 2 13-3 18-5 5-12 6-18 3l-5 5z"/>
+            <path d="m89 38 8-8c2 1 4 3 5 5l-8 8-3-1z" fill="#fff" stroke="none"/>
+            <circle cx="42" cy="86" r="7"/>
+            <circle cx="42" cy="86" r="3" fill="#fff" stroke="none"/>
+            <path d="m48 48 35 35" fill="none" stroke-width="4"/>
+            <path d="M34 34c-4-4-4-10 0-14 4-4 10-4 14 0l11 11c3 3 3 8 0 11l-3 3c-3 3-8 3-11 0z"/>
+            <circle cx="38" cy="26" r="2" fill="#fff" stroke="none"/>
+            <path d="m52 43 4 4" fill="none" stroke="#fff" stroke-width="2"/>
+            <path d="m81 81 7 7 5 8-3 3-8-5-7-7z"/>
+        </g>
+    </g>
+</svg>

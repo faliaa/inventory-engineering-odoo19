@@ -1,21 +1,22 @@
 {
     'name': 'Engineering',
-    'version': '19.0.1.0.0',
-    'summary': 'Integrated Engineering Inventory',
+    'version': '19.0.1.6.0',
+    'summary': 'Engineering inventory dashboard and stock reports',
     'description': """
-Inventory & Purchase Management for Engineering.
+Engineering inventory and movement management.
 
 Features:
-- Master Product
-- Stock In and Stock Out
-- Good Stock and Reject Stock tracking
-- Stock Transfer
-- Stock Card
+- Tools & Equipment
+- Engineering stock dashboard and summary
+- Dashboard KPIs for stock balances, movements, and locations
+- Good and bad stock condition reports
+- Receipts, internal transfers, and returns
+- Stock Card documents with multi-product Excel export
+- Annual stock movement and stock opname reports
+- Department assignment for internal transfers
 - Equipment Register
 - Minimum Stock Alerts
 - Purchase Integration
-- Monthly Stock Opname
-- Weekly, Monthly, and Yearly Reports
 """,
     'category': 'Inventory/Inventory',
     'author': 'Custom Development',
@@ -33,9 +34,13 @@ Features:
         'views/material_request_views.xml',
         'views/product_template_views.xml',
         'views/equipment_register_views.xml',
+        'views/department_views.xml',
         'views/res_config_settings_views.xml',
         'views/stock_picking_views.xml',
         'views/stock_card_views.xml',
+        'views/stock_card_report_views.xml',
+        'views/engineering_dashboard_views.xml',
+        'views/stock_summary_views.xml',
         'views/menu_views.xml',
     ],
 

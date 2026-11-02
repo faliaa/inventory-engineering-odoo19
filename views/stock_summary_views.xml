@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_engineering_stock_summary_list" model="ir.ui.view">
+        <field name="name">engineering.stock.summary.list</field>
+        <field name="model">engineering.stock.summary</field>
+        <field name="arch" type="xml">
+            <list string="Engineering Stock Dashboard" create="0" edit="0" delete="0">
+                <field name="product_id"/>
+                <field name="goods_condition" widget="badge"/>
+                <field name="location_id"/>
+                <field name="qty_on_hand" sum="Total On Hand"/>
+                <field name="qty_in" sum="Total In"/>
+                <field name="qty_out" sum="Total Out"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_engineering_stock_summary_graph" model="ir.ui.view">
+        <field name="name">engineering.stock.summary.graph</field>
+        <field name="model">engineering.stock.summary</field>
+        <field name="arch" type="xml">
+            <graph string="Engineering Stock Dashboard" type="bar" stacked="1">
+                <field name="location_id"/>
+                <field name="goods_condition"/>
+                <field name="qty_on_hand" type="measure"/>
+                <field name="qty_in" type="measure"/>
+                <field name="qty_out" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_engineering_stock_summary_pivot" model="ir.ui.view">
+        <field name="name">engineering.stock.summary.pivot</field>
+        <field name="model">engineering.stock.summary</field>
+        <field name="arch" type="xml">
+            <pivot string="Engineering Stock Summary">
+                <field name="location_id" type="row"/>
+                <field name="goods_condition" type="row"/>
+                <field name="product_id" type="row"/>
+                <field name="qty_on_hand" type="measure"/>
+                <field name="qty_in" type="measure"/>
+                <field name="qty_out" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_engineering_stock_summary_search" model="ir.ui.view">
+        <field name="name">engineering.stock.summary.search</field>
+        <field name="model">engineering.stock.summary</field>
+        <field name="arch" type="xml">
+            <search string="Engineering Stock">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="goods_condition"/>
+                <filter name="good_stock" string="Good Stock"
+                        domain="[('goods_condition', '=', 'good')]"/>
+                <filter name="bad_stock" string="Bad Stock"
+                        domain="[('goods_condition', '=', 'bad')]"/>
+                <group>
+                    <filter name="group_by_location" string="Location"
+                            context="{'group_by': 'location_id'}"/>
+                    <filter name="group_by_condition" string="Condition"
+                            context="{'group_by': 'goods_condition'}"/>
+                    <filter name="group_by_product" string="Product"
+                            context="{'group_by': 'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_engineering_stock_dashboard" model="ir.actions.act_window">
+        <field name="name">Engineering Dashboard</field>
+        <field name="res_model">engineering.stock.dashboard</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="view_engineering_stock_dashboard_kanban"/>
+        <field name="search_view_id" eval="False"/>
+    </record>
+
+    <record id="action_engineering_dashboard_incoming" model="ir.actions.act_window">
+        <field name="name">Incoming Stock Movements</field>
+        <field name="res_model">engineering.stock.card</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="search_view_id" ref="view_engineering_stock_card_search"/>
+        <field name="domain">[('qty_in', '&gt;', 0)]</field>
+    </record>
+
+    <record id="action_engineering_dashboard_outgoing" model="ir.actions.act_window">
+        <field name="name">Outgoing Stock Movements</field>
+        <field name="res_model">engineering.stock.card</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="search_view_id" ref="view_engineering_stock_card_search"/>
+        <field name="domain">[('qty_out', '&gt;', 0)]</field>
+    </record>
+
+    <record id="action_engineering_dashboard_on_hand" model="ir.actions.act_window">
+        <field name="name">Current Stock by Location</field>
+        <field name="res_model">engineering.stock.summary</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="search_view_id" ref="view_engineering_stock_summary_search"/>
+        <field name="domain">[('qty_on_hand', '&gt;', 0)]</field>
+    </record>
+
+    <record id="action_engineering_stock_summary" model="ir.actions.act_window">
+        <field name="name">Stock Summary</field>
+        <field name="res_model">engineering.stock.summary</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="view_engineering_stock_summary_search"/>
+        <field name="context">{'search_default_group_by_location': 1}</field>
+    </record>
+
+    <record id="action_engineering_tools_condition_report" model="ir.actions.act_window">
+        <field name="name">Tools Condition Report</field>
+        <field name="res_model">engineering.stock.summary</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="view_engineering_stock_summary_search"/>
+        <field name="context">{'search_default_group_by_condition': 1}</field>
+    </record>
+
+    <record id="action_engineering_annual_report" model="ir.actions.act_window">
+        <field name="name">Annual Report</field>
+        <field name="res_model">engineering.stock.card</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="search_view_id" ref="view_engineering_stock_card_search"/>
+        <field name="context">{'search_default_group_by_year': 1}</field>
+    </record>
+
+    <record id="view_engineering_stock_opname_list" model="ir.ui.view">
+        <field name="name">engineering.stock.opname.list</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <list string="Stock Opname Report" create="0" edit="0" delete="0">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="lot_id"/>
+                <field name="quantity" sum="Total Quantity"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_engineering_stock_opname_report" model="ir.actions.act_window">
+        <field name="name">Stock Opname Report</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_engineering_stock_opname_list"/>
+        <field name="domain">[('location_id.usage', '=', 'internal'), ('location_id.complete_name', 'ilike', 'ENG')]</field>
+    </record>
+</odoo>

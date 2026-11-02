@@ -1,127 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="action_engineering_stock_returns" model="ir.actions.act_window">
+        <field name="name">Returns</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('return_id', '!=', False)]</field>
+        <field name="context">{'contact_display': 'partner_address'}</field>
+    </record>
 
-    <!-- Menu utama aplikasi -->
+    <record id="menu_inventory_deliveries" model="ir.ui.menu">
+        <field name="action" eval="False"/>
+    </record>
+
     <menuitem
-        id="menu_inventory_purchase_root"
+        id="menu_inventory_engineering_root"
         name="Engineering"
         sequence="10"
         groups="stock.group_stock_user"
+        web_icon="inventory_engineering_odoo19,static/description/equipment_icon.svg"
     />
 
-    <!-- Aksi untuk membuka daftar produk -->
-    <record id="action_inventory_purchase_products" model="ir.actions.act_window">
-        <field name="name">Master Product</field>
+    <menuitem
+        id="menu_engineering_dashboard"
+        name="Dashboard"
+        parent="menu_inventory_engineering_root"
+        action="action_engineering_stock_dashboard"
+        sequence="1"
+        groups="stock.group_stock_user"
+    />
+
+    <record id="action_inventory_engineering_products" model="ir.actions.act_window">
+        <field name="name">Tools &amp; Equipment</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">list,form</field>
         <field name="target">current</field>
     </record>
 
-    <!-- Menu Master Product -->
     <menuitem
-        id="menu_inventory_purchase_products"
-        name="Master Product"
-        parent="menu_inventory_purchase_root"
-        action="action_inventory_purchase_products"
+        id="menu_inventory_engineering_products"
+        name="Tools &amp; Equipment"
+        parent="menu_inventory_engineering_root"
+        action="action_inventory_engineering_products"
         sequence="10"
         groups="stock.group_stock_user"
     />
 
-    <!-- Menu Material Request -->
     <menuitem
-        id="menu_inventory_material_request"
-        name="Material Request"
-        parent="menu_inventory_purchase_root"
-        action="action_inventory_material_request"
-        sequence="15"
-        groups="stock.group_stock_user"
-    />
-
-        <!-- Menu Barang Masuk -->
-    <menuitem
-        id="menu_inventory_receipts"
-        name="Barang Masuk"
-        parent="menu_inventory_purchase_root"
-        action="stock.action_picking_tree_incoming"
+        id="menu_inventory_deliveries"
+        name="Stock Movement"
+        parent="menu_inventory_engineering_root"
         sequence="20"
         groups="stock.group_stock_user"
     />
 
-    <!-- Menu Barang Keluar -->
     <menuitem
-        id="menu_inventory_deliveries"
-        name="Barang Keluar"
-        parent="menu_inventory_purchase_root"
-        action="stock.action_picking_tree_outgoing"
+        id="menu_inventory_receipts"
+        name="Receipt"
+        parent="menu_inventory_deliveries"
+        action="stock.action_picking_tree_incoming"
+        sequence="10"
+        groups="stock.group_stock_user"
+    />
+
+    <menuitem
+        id="menu_engineering_internal_transfer"
+        name="Internal Transfer"
+        parent="menu_inventory_deliveries"
+        action="stock.action_picking_tree_internal"
+        sequence="20"
+        groups="stock.group_stock_user"
+    />
+
+    <menuitem
+        id="menu_engineering_stock_returns"
+        name="Return"
+        parent="menu_inventory_deliveries"
+        action="action_engineering_stock_returns"
         sequence="30"
         groups="stock.group_stock_user"
     />
-    
-        <!-- Akses menu Equipment Register -->
+
     <menuitem
-        id="menu_equipment_register"
-        name="Equipment Register"
-        parent="menu_inventory_purchase_root"
-        action="action_equipment_register"
-        sequence="20"
+        id="menu_engineering_stock_card"
+        name="Stock Card"
+        parent="menu_inventory_engineering_root"
+        action="action_engineering_stock_card"
+        sequence="40"
         groups="stock.group_stock_user"
     />
-        <!-- Menu Configuration -->
+
     <menuitem
-        id="menu_inventory_purchase_configuration"
+        id="menu_inventory_engineering_configuration"
         name="Configuration"
-        parent="menu_inventory_purchase_root"
+        parent="menu_inventory_engineering_root"
         sequence="90"
         groups="stock.group_stock_manager"
     />
 
-    <!-- Submenu Settings -->
     <menuitem
-    id="menu_inventory_purchase_settings"
-    name="Settings"
-    parent="menu_inventory_purchase_configuration"
-    action="action_inventory_purchase_settings"
-    sequence="10"
-    groups="stock.group_stock_manager"
+        id="menu_inventory_engineering_settings"
+        name="Settings"
+        parent="menu_inventory_engineering_configuration"
+        action="action_inventory_engineering_settings"
+        sequence="10"
+        groups="stock.group_stock_manager"
     />
 
-        <!-- Submenu Master Data -->
     <menuitem
-        id="menu_inventory_purchase_master_data"
+        id="menu_inventory_engineering_master_data"
         name="Master Data"
-        parent="menu_inventory_purchase_configuration"
+        parent="menu_inventory_engineering_configuration"
         sequence="20"
         groups="stock.group_stock_manager"
     />
 
-    <!-- Master Product Categories -->
     <menuitem
         id="menu_master_product_categories"
         name="Product Categories"
-        parent="menu_inventory_purchase_master_data"
+        parent="menu_inventory_engineering_master_data"
         action="product.product_category_action_form"
         sequence="10"
         groups="stock.group_stock_manager"
     />
 
-    <!-- Master Units of Measure -->
     <menuitem
         id="menu_master_units_of_measure"
         name="Units of Measure"
-        parent="menu_inventory_purchase_master_data"
+        parent="menu_inventory_engineering_master_data"
         action="uom.product_uom_form_action"
         sequence="20"
         groups="stock.group_stock_manager"
     />
 
-    <!-- Master Storage Locations -->
     <menuitem
         id="menu_master_storage_locations"
         name="Storage Locations"
-        parent="menu_inventory_purchase_master_data"
+        parent="menu_inventory_engineering_master_data"
         action="stock.action_location_form"
         sequence="30"
         groups="stock.group_stock_manager"
     />
 
-</odoo> 
+    <menuitem
+        id="menu_inventory_engineering_departments"
+        name="Department"
+        parent="menu_inventory_engineering_configuration"
+        action="action_inventory_departments"
+        sequence="30"
+        groups="stock.group_stock_manager"
+    />
+
+    <menuitem
+        id="menu_engineering_reporting"
+        name="Reporting"
+        parent="menu_inventory_engineering_root"
+        sequence="50"
+        groups="stock.group_stock_user"
+    />
+
+    <delete model="ir.ui.menu"
+            search="[('name', '=', 'Stock Card Excel'), ('parent_id', '=', ref('menu_engineering_reporting'))]"/>
+
+    <menuitem
+        id="menu_engineering_stock_summary"
+        name="Stock Summary"
+        parent="menu_engineering_reporting"
+        action="action_engineering_stock_summary"
+        sequence="10"
+        groups="stock.group_stock_user"
+    />
+
+    <menuitem
+        id="menu_engineering_tools_condition_report"
+        name="Tools Condition Report"
+        parent="menu_engineering_reporting"
+        action="action_engineering_tools_condition_report"
+        sequence="20"
+        groups="stock.group_stock_user"
+    />
+
+    <menuitem
+        id="menu_engineering_stock_movement_report"
+        name="Stock Movement Report"
+        parent="menu_engineering_reporting"
+        action="action_engineering_stock_movement_report"
+        sequence="30"
+        groups="stock.group_stock_user"
+    />
+
+    <menuitem
+        id="menu_engineering_annual_report"
+        name="Annual Report"
+        parent="menu_engineering_reporting"
+        action="action_engineering_annual_report"
+        sequence="40"
+        groups="stock.group_stock_user"
+    />
+
+    <menuitem
+        id="menu_engineering_stock_opname_report"
+        name="Stock Opname Report"
+        parent="menu_engineering_reporting"
+        action="action_engineering_stock_opname_report"
+        sequence="50"
+        groups="stock.group_stock_user"
+    />
+
+    <record id="menu_inventory_material_request" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="menu_equipment_register" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

@@ -8,5 +8,12 @@
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
         </record>
+        <record id="seq_engineering_stock_card_document" model="ir.sequence">
+            <field name="name">Engineering Stock Card</field>
+            <field name="code">engineering.stock.card.document</field>
+            <field name="prefix">SC/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
     </data>
 </odoo>
